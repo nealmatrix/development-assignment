@@ -1,0 +1,10 @@
+namespace MySample;
+
+table Property {
+    name: string;
+    value: float;
+    type: string;
+    sub_properties: [Property];
+}
+
+root_type Property;
