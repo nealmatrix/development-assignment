@@ -8,6 +8,8 @@ Research on the [Google FlatBuffers projects](https://google.github.io/flatbuffe
 - Write code snippets in C++ that use the reflection API to read from the TCP socket and iterate over the elements stored inside the property tree.
 - Consider the property tree will be updated frequently by the sender, think of a solution that synchronize the updates to the receiver.
 
+---
+
 ### Task 1
 
 - build flatc compiler tool
@@ -18,13 +20,24 @@ cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
-- write a sample schema: property.fbs and define property object
+- write a sample schema: property.fbs which defines property object
 - compile the property schema
 ```bash
-../open_sources/flatbuffers/build/flatc --cpp property.fbs
+../open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
 ```
 
+---
+
 ### Task 2
+
+---
+
 ### Task 3
+
+---
+
 ### Task 4
+
+---
+
 ### Task 5

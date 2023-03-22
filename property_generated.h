@@ -29,14 +29,26 @@ struct Property FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   const ::flatbuffers::String *name() const {
     return GetPointer<const ::flatbuffers::String *>(VT_NAME);
   }
+  ::flatbuffers::String *mutable_name() {
+    return GetPointer<::flatbuffers::String *>(VT_NAME);
+  }
   float value() const {
     return GetField<float>(VT_VALUE, 0.0f);
+  }
+  bool mutate_value(float _value = 0.0f) {
+    return SetField<float>(VT_VALUE, _value, 0.0f);
   }
   const ::flatbuffers::String *type() const {
     return GetPointer<const ::flatbuffers::String *>(VT_TYPE);
   }
+  ::flatbuffers::String *mutable_type() {
+    return GetPointer<::flatbuffers::String *>(VT_TYPE);
+  }
   const ::flatbuffers::Vector<::flatbuffers::Offset<MySample::Property>> *sub_properties() const {
     return GetPointer<const ::flatbuffers::Vector<::flatbuffers::Offset<MySample::Property>> *>(VT_SUB_PROPERTIES);
+  }
+  ::flatbuffers::Vector<::flatbuffers::Offset<MySample::Property>> *mutable_sub_properties() {
+    return GetPointer<::flatbuffers::Vector<::flatbuffers::Offset<MySample::Property>> *>(VT_SUB_PROPERTIES);
   }
   bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
@@ -116,6 +128,14 @@ inline const MySample::Property *GetProperty(const void *buf) {
 
 inline const MySample::Property *GetSizePrefixedProperty(const void *buf) {
   return ::flatbuffers::GetSizePrefixedRoot<MySample::Property>(buf);
+}
+
+inline Property *GetMutableProperty(void *buf) {
+  return ::flatbuffers::GetMutableRoot<Property>(buf);
+}
+
+inline MySample::Property *GetMutableSizePrefixedProperty(void *buf) {
+  return ::flatbuffers::GetMutableSizePrefixedRoot<MySample::Property>(buf);
 }
 
 inline bool VerifyPropertyBuffer(
