@@ -116,5 +116,9 @@ clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/fl
 ---
 
 ### Task 5 - synchronize the updates
-- One of the solutions is to use publish-subscribe messaging. In a pub/sub model, any message published to a topic by sender is immediately received by the subscribers to the topic. 
-- In crypto exchange, it is usually to use websocket which utilizes publish-subscribe pattern. Websocket provides full-duplex communication channels over a single TCP connection. Users can get public and private data from exchanges passively.
+- Receiver can immediately receive the update made by the sender
+    - Use publish-subscribe messaging. In a pub/sub model, any message published to a topic by sender is immediately received by the subscribers to the topic. 
+    - In crypto exchange, it is usually to use websocket which utilizes publish-subscribe pattern. Websocket provides full-duplex communication channels over a single TCP connection. Users can get public and private data from exchanges passively.
+- Once receiver received updates, how to efficiently update the property tree
+    - Add unique id to each node. Then we can organize the property tree as binary search tree which can reduce the search time from O(n) to O(logn)
+    - We can also use BFS(breadth-first search) or DFS(depth-first search) to find the node needs to be updated.
