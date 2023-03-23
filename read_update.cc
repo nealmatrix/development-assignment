@@ -20,7 +20,8 @@ uint8_t * create_property(std::string name, float value, std::string type){
     property_builder.add_type(property_type);
     property_builder.add_sub_properties(sub_properties);
 
-    property_builder.Finish();
+    auto property = property_builder.Finish();
+    builder.Finish(property);
     return builder.GetBufferPointer();
 }
 
@@ -54,6 +55,7 @@ void update_property(uint8_t *buffer_pointer, float new_value){
 int main(){
     uint8_t *buffer_pointer = create_property("my_proptery", 1.23, "my_type");
     read_property(buffer_pointer);
+    std::cout << "after change:" << std::endl;
     update_property(buffer_pointer, 10);
     read_property(buffer_pointer);
 }

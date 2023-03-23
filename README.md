@@ -29,6 +29,25 @@ make
 ---
 
 ### Task 2
+- code read_update.cc
+    - create_property()
+    - read_property()
+    - update_property()
+- compile and run
+```bash
+clang++ -o read_update.out -Wall -std=c++11 read_update.cc -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/"
+./read_update.out
+```
+- result
+```bash
+property_name: my_proptery
+property_value: 1.23
+property_type: my_type
+after change:
+property_name: my_proptery
+property_value: 10
+property_type: my_type
+```
 
 ---
 
@@ -41,3 +60,5 @@ make
 ---
 
 ### Task 5
+- One of the solutions is to use publish-subscribe messaging. In a pub/sub model, any message published to a topic by sender is immediately received by the subscribers to the topic. 
+- In crypto exchange, it is usually to use websocket which utilizes publish-subscribe pattern. Websocket provides full-duplex communication channels over a single TCP connection. Users can get public and private data from exchanges passively.
