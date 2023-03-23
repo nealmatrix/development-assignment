@@ -20,7 +20,9 @@ cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make
 ```
-- write a sample schema: property.fbs which defines property object
+- sample schema
+    - property.fbs
+    - defines property object
 - compile the property schema
 ```bash
 ../open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
@@ -29,13 +31,20 @@ make
 ---
 
 ### Task 2
-- code read_update.cc
-    - create_property()
-    - read_property()
-    - update_property()
+- read property object
+    - `void read_property(uint8_t *buffer_pointer)` 
+    - header in functions.h
+    - source code in functions.cc
+- update property object
+    - `void update_property(uint8_t *buffer_pointer, float new_value)` 
+    - header in functions.h
+    - source code in functions.cc
+- main program
+    - read_update.cc
 - compile and run
 ```bash
-clang++ -o read_update.out -Wall -std=c++11 read_update.cc -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/"
+clang++ -Wall -std=c++11 -c read_update.cc functions.cc -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/"
+clang++ functions.o read_update.o -o read_update.out
 ./read_update.out
 ```
 - result
