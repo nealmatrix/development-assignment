@@ -100,12 +100,14 @@ property_type: my_type
 ### Task 4 - reflection api
 - full reflection, use the following command to generate property.bfbs
 ```bash
+cd src
 /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc -b --schema /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/reflection/reflection.fbs property.fbs 
 ```
-- main
-    - reflection_api.cc
+- main program
+    - src/reflection_api.cc
 - compile and run
 ```bash
+cd src
 clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" reflection_api.cc functions.cc /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/src/util.cpp -o reflection_api.out
 ./reflection_api.out
 ```
