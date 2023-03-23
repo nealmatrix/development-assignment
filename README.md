@@ -10,8 +10,7 @@ Research on the [Google FlatBuffers projects](https://google.github.io/flatbuffe
 
 ---
 
-### Task 1
-
+### Task 1 - sample schema
 - build flatc compiler tool
 ```bash
 git clone https://github.com/google/flatbuffers.git
@@ -26,22 +25,22 @@ make
     - defines property object
 - compile the property schema
 ```bash
-../open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
+/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
 ```
 
 ---
 
-### Task 2
+### Task 2 - read/update property object
 - read property object
     - `void read_property(uint8_t *buffer_pointer)` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - update property object
     - `void update_property(uint8_t *buffer_pointer, float new_value)` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - main program
-    - read_update.cc
+    - src/read_update.cc
 - compile and run
 ```bash
 cd src
@@ -63,18 +62,18 @@ property_type: my_type
 
 ---
 
-### Task 3
+### Task 3 - send/receive property over TCP socket
 - send property over TCP socket
     - `void start_client()` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - receive property over TCP socket
     - `void stop_server(int p)`, `void start_server()` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - main program
-    - client.cc
-    - server.cc
+    - src/client.cc
+    - src/server.cc
 - compile and run
 ```bash
 cd src
@@ -84,6 +83,10 @@ clang++ functions.o server.o -o server.out
 ./server.out
 ./client.out
 ```
+- client output
+```bash
+buffer size: 68
+```
 - server output
 ```bash
 property_name: my_proptery
@@ -91,17 +94,25 @@ property_value: 1.23
 property_type: my_type
 ^Cclose server
 ```
-- client output
+
+---
+
+### Task 4 - reflection api
+- full reflection, use the following command to generate property.bfbs
 ```bash
-buffer size: 68
+/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc -b --schema /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/reflection/reflection.fbs property.fbs 
 ```
+- main
+    - reflection_api.cc
+- compile and run
+```bash
+clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" reflection_api.cc functions.cc /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/src/util.cpp -o reflection_api.out
+./reflection_api.out
+```
+- After research, I can only use reflection api to get root table and list types in fbs.
 
 ---
 
-### Task 4
-
----
-
-### Task 5
+### Task 5 - synchronize the updates
 - One of the solutions is to use publish-subscribe messaging. In a pub/sub model, any message published to a topic by sender is immediately received by the subscribers to the topic. 
 - In crypto exchange, it is usually to use websocket which utilizes publish-subscribe pattern. Websocket provides full-duplex communication channels over a single TCP connection. Users can get public and private data from exchanges passively.
