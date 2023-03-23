@@ -26,7 +26,7 @@ make
     - defines property object
 - compile the property schema
 ```bash
-../open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
+/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc --gen-mutable --cpp property.fbs
 ```
 
 ---
@@ -34,14 +34,14 @@ make
 ### Task 2
 - read property object
     - `void read_property(uint8_t *buffer_pointer)` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - update property object
     - `void update_property(uint8_t *buffer_pointer, float new_value)` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - main program
-    - read_update.cc
+    - src/read_update.cc
 - compile and run
 ```bash
 cd src
@@ -66,15 +66,15 @@ property_type: my_type
 ### Task 3
 - send property over TCP socket
     - `void start_client()` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - receive property over TCP socket
     - `void stop_server(int p)`, `void start_server()` 
-    - header in functions.h
-    - source code in functions.cc
+    - header in src/functions.h
+    - source code in src/functions.cc
 - main program
-    - client.cc
-    - server.cc
+    - src/client.cc
+    - src/server.cc
 - compile and run
 ```bash
 cd src
@@ -84,6 +84,10 @@ clang++ functions.o server.o -o server.out
 ./server.out
 ./client.out
 ```
+- client output
+```bash
+buffer size: 68
+```
 - server output
 ```bash
 property_name: my_proptery
@@ -91,14 +95,21 @@ property_value: 1.23
 property_type: my_type
 ^Cclose server
 ```
-- client output
-```bash
-buffer size: 68
-```
 
 ---
 
 ### Task 4
+- full reflection, use the following command to generate property.bfbs
+```bash
+/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc -b --schema /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/reflection/reflection.fbs property.fbs 
+```
+- reflection api
+    - reflection_api.cc
+- compile and run
+```bash
+clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c reflection_api.cc functions.cc
+clang++ functions.o reflection_api.o -o reflection.out
+```
 
 ---
 
