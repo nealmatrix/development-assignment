@@ -1,4 +1,5 @@
 v0.1.0
+    [7] synchronize updates to the receiver
     [5] reflection api to iterate over elements in property tree
     [3] send and receive over TCP socket
     [1] read and update object from flatbuffers
