@@ -6,6 +6,7 @@
 
 #define IP_ADDRESS "127.0.0.1"
 #define DEFAULT_PORT 1234
+// #define BUFFSIZE 2048
 
 int main(){
     int sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -17,9 +18,9 @@ int main(){
     serv_addr.sin_port = htons(DEFAULT_PORT);
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
 
-    char buffer[40];
-    read(sock, buffer, sizeof(buffer) - 1);
-    std::cout << buffer << std::endl;
+    // char buffer[BUFFSIZE];
+    char str[] = "test socket";
+    write(sock, str, sizeof(str));
 
     close(sock);
 
