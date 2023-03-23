@@ -15,6 +15,7 @@ Research on the [Google FlatBuffers projects](https://google.github.io/flatbuffe
 - build flatc compiler tool
 ```bash
 git clone https://github.com/google/flatbuffers.git
+cd flatbuffers
 mkdir build
 cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
@@ -43,7 +44,7 @@ make
     - read_update.cc
 - compile and run
 ```bash
-clang++ -Wall -std=c++11 -c read_update.cc functions.cc -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/"
+clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c read_update.cc functions.cc
 clang++ functions.o read_update.o -o read_update.out
 ./read_update.out
 ```
@@ -61,6 +62,30 @@ property_type: my_type
 ---
 
 ### Task 3
+- send property over TCP socket
+    - `void start_client()` 
+    - header in functions.h
+    - source code in functions.cc
+- receive property over TCP socket
+    - `void stop_server(int p)`, `void start_server()` 
+    - header in functions.h
+    - source code in functions.cc
+- main program
+    - client.cc
+    - server.cc
+- compile and run
+```bash
+clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c server.cc client.cc functions.cc
+clang++ functions.o client.o -o client.out
+clang++ functions.o server.o -o server.out
+./server.out
+./client.out
+```
+- server result
+```bash
+test socket
+^Cclose server
+```
 
 ---
 
