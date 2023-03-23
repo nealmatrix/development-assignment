@@ -44,6 +44,7 @@ make
     - read_update.cc
 - compile and run
 ```bash
+cd src
 clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c read_update.cc functions.cc
 clang++ functions.o read_update.o -o read_update.out
 ./read_update.out
@@ -76,6 +77,7 @@ property_type: my_type
     - server.cc
 - compile and run
 ```bash
+cd src
 clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c server.cc client.cc functions.cc
 clang++ functions.o client.o -o client.out
 clang++ functions.o server.o -o server.out
