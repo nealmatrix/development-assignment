@@ -14,7 +14,7 @@
 #define BUFFSIZE 2048
 
 int server_sock;
-uint8_t *buffer_pointer;
+int buffer_size;
 
 uint8_t * create_property(std::string name, float value, std::string type){
     flatbuffers::FlatBufferBuilder builder(1024);
@@ -32,6 +32,7 @@ uint8_t * create_property(std::string name, float value, std::string type){
 
     auto property = property_builder.Finish();
     builder.Finish(property);
+    buffer_size = builder.GetSize();
     return builder.GetBufferPointer();
 }
 
@@ -82,7 +83,7 @@ void start_server(){
 
     struct sockaddr_in client_addr;
     socklen_t client_addr_size = sizeof(client_addr);
-    char buffer[BUFFSIZE];
+    uint8_t buffer[BUFFSIZE];
 
     while(true){
         signal(SIGINT, stop_server);
@@ -90,13 +91,14 @@ void start_server(){
 
         bzero(buffer, BUFFSIZE);
         read(client_sock, buffer, BUFFSIZE - 1);
-        std::cout << buffer << std::endl;
+        // std::cout << buffer << std::endl;
+        read_property(buffer);
 
         close(client_sock);
     }
 }
 
-void start_client(){
+void start_client(uint8_t * buffer_pointer, int buffer_size){
     int sock = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in serv_addr;
@@ -107,8 +109,9 @@ void start_client(){
     connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
 
     // char buffer[BUFFSIZE];
-    char str[] = "test socket";
-    write(sock, str, sizeof(str));
+    // char str[] = "test socket";
+    // write(sock, str, sizeof(str));
+    write(sock, buffer_pointer, buffer_size);
 
     close(sock);
 }

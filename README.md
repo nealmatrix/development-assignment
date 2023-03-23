@@ -48,8 +48,9 @@ clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/fl
 clang++ functions.o read_update.o -o read_update.out
 ./read_update.out
 ```
-- result
+- output
 ```bash
+buffer size: 68
 property_name: my_proptery
 property_value: 1.23
 property_type: my_type
@@ -81,10 +82,16 @@ clang++ functions.o server.o -o server.out
 ./server.out
 ./client.out
 ```
-- server result
+- server output
 ```bash
-test socket
+property_name: my_proptery
+property_value: 1.23
+property_type: my_type
 ^Cclose server
+```
+- client output
+```bash
+buffer size: 68
 ```
 
 ---
