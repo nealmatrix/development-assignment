@@ -10,8 +10,7 @@ Research on the [Google FlatBuffers projects](https://google.github.io/flatbuffe
 
 ---
 
-### Task 1
-
+### Task 1 - sample schema
 - build flatc compiler tool
 ```bash
 git clone https://github.com/google/flatbuffers.git
@@ -31,7 +30,7 @@ make
 
 ---
 
-### Task 2
+### Task 2 - read/update property object
 - read property object
     - `void read_property(uint8_t *buffer_pointer)` 
     - header in src/functions.h
@@ -63,7 +62,7 @@ property_type: my_type
 
 ---
 
-### Task 3
+### Task 3 - send/receive property over TCP socket
 - send property over TCP socket
     - `void start_client()` 
     - header in src/functions.h
@@ -98,21 +97,22 @@ property_type: my_type
 
 ---
 
-### Task 4
+### Task 4 - reflection api
 - full reflection, use the following command to generate property.bfbs
 ```bash
 /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/build/flatc -b --schema /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/reflection/reflection.fbs property.fbs 
 ```
-- reflection api
+- main
     - reflection_api.cc
 - compile and run
 ```bash
-clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" -c reflection_api.cc functions.cc
-clang++ functions.o reflection_api.o -o reflection.out
+clang++ -Wall -std=c++11 -I"/Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/include/" reflection_api.cc functions.cc /Users/chuanyu/Dropbox/Code/Projects/open_sources/flatbuffers/src/util.cpp -o reflection_api.out
+./reflection_api.out
 ```
+- After research, I can only use reflection api to get root table and list types in fbs.
 
 ---
 
-### Task 5
+### Task 5 - synchronize the updates
 - One of the solutions is to use publish-subscribe messaging. In a pub/sub model, any message published to a topic by sender is immediately received by the subscribers to the topic. 
 - In crypto exchange, it is usually to use websocket which utilizes publish-subscribe pattern. Websocket provides full-duplex communication channels over a single TCP connection. Users can get public and private data from exchanges passively.
